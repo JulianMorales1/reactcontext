@@ -10,6 +10,10 @@ import CartPage from './components/pages/CartPage';
 import ShoppingCartContextProvider from './context/shoppingCartContext';
 import UserProvider from './context/UserContext';
 
+//Redux
+import { Provider } from 'react-redux';
+import store from './store/store';
+
 
 
 
@@ -27,19 +31,21 @@ function App() {
 
   }
   return (
-    <CustomThemeProvider>
-      <UserProvider>
-        <ShoppingCartContextProvider>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/user" element={<SignInPage />} />
-              <Route path="/cart" element={<CartPage addToCart={addToCart} removeFromCart={removeFromCart} emptyCart={emptyCart} />} />
-            </Routes>
-          </BrowserRouter>
-        </ShoppingCartContextProvider>
-      </UserProvider>
-    </CustomThemeProvider>
+    <Provider store={store}>
+      <CustomThemeProvider>
+        <UserProvider>
+          <ShoppingCartContextProvider>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/user" element={<SignInPage />} />
+                <Route path="/cart" element={<CartPage addToCart={addToCart} removeFromCart={removeFromCart} emptyCart={emptyCart} />} />
+              </Routes>
+            </BrowserRouter>
+          </ShoppingCartContextProvider>
+        </UserProvider>
+      </CustomThemeProvider>
+    </Provider>
 
   );
 }

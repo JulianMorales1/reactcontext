@@ -11,12 +11,17 @@ import { Link } from 'react-router-dom';
 import { shoppingCartContext, useShoppingCart } from '../../context/shoppingCartContext';
 import { useUser } from '../../context/UserContext'
 
+//Redux
+import { useSelector, useDispatch } from 'react-redux';
+
+
 export default function Header() {
-    const { user, signIn, signOut } = useUser();
+    //const { user, signIn, signOut } = useUser();
+    const user = useSelector(state => state.user)
 
-    const { shoppingCart } = useShoppingCart();
+    const shoppingCart = useShoppingCart();
 
-    const cartCount = shoppingCart.reduce((acc, cartItem) => acc + cartItem.quantity, 0);
+    const cartCount = shoppingCart.cartItems.reduce((acc, cartItem) => acc + cartItem.quantity, 0);
 
     return (
         <Box sx={{ flexGrow: 1 }}>

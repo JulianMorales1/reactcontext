@@ -3,26 +3,36 @@ import {
     Box, Button, TextField, Typography,
 } from '@mui/material';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useUser } from '../../context/UserContext'
-import { sampleUserData } from '../../mockData';
+
 import Layout from '../layout/Layout';
+import { sampleUserData } from '../../mockData';
+import { signIn, signOut } from '../../store/userSlice'
 
 function SignInPage(props) {
 
-    const { user, signIn, signOut } = useUser();
+
+    const dispatch = useDispatch();
+    const user = useSelector((state) => state.user)
+
     const [signInForm, setSignInForm] = useState({
         email: '',
         password: '',
     });
 
+
+
     const onSubmit = () => {
         // set the mock user as the user
-        signIn(sampleUserData);
+        // signIn(sampleUserData);
+        dispatch(signIn(sampleUserData))
     };
 
     const handleSignOut = () => {
         // // Sign out the user.
-        signOut();
+        //signOut();
+        dispatch(signOut)
     };
 
 
